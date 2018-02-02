@@ -1,0 +1,26 @@
+<!doctype>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+    <div class="screen">
+      <div class="bloc_score bloc_score1"></div>
+      <div class="bloc_score bloc_score2"></div>
+      <div class="last_tweet"></div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(function(){
+        var socket = io();
+
+        socket.on('new last tweet', function(data){
+          $('.last_tweet').text(data.tweet_text);
+        });
+      });
+    </script>
+  </body>
+</html>

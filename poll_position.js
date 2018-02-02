@@ -1,9 +1,16 @@
+/* Variables */
+
+var useArduino = false;
+var twitterUsernameIdRecevingPollResults = '928204573642231808'; // http://gettwitterid.com/?user_name=Bastientestdsaa
+
+/* Dep */
+
 var Twit = require('twit')
 var fs = require('fs')
 var five = require("johnny-five");
-//var board = new five.Board();
-
-var twitterUsernameIdRecevingPollResults = '928204573642231808'; // http://gettwitterid.com/?user_name=Bastientestdsaa
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 var T = new Twit({
   consumer_key:         'fR0WktkLF4G3rm9OfdbMOsQny',
@@ -13,18 +20,22 @@ var T = new Twit({
   timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
 })
 
-var stream;
+if (useArduino == true) {
+  var board = new five.Board();
+}
 
-var scoreboard = {};
-var teamscoreboard = { //lancer team, declarer structure donnees
-  1 : 0,
-  2 : 0,
-  3 : 0, //lap rhone
-  4 : 0, //lap
-};
-var team1 = true;
-var RHONE = 1; //var globale
-var SAONE = 2;
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/index.html');
+});
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
+
+http.listen(3000, function(){
+  console.log('listening on *:3000');
+});
+
 
 var polls = [
   {
@@ -49,6 +60,7 @@ var polls = [
   }
 ];
 
+var stream;
 var currentPoll = 0;
 
 function doPoll() {
@@ -97,7 +109,7 @@ function processTweet( tweet ) {
   var id = tweet.id;
 
   polls[currentPoll][team].score++;
-  /*
+
   if (team == 'team1') { //put the post media here (red) /!\ modulo put this in an other if
     var led = new five.Led(13);
     led.on();
@@ -113,7 +125,7 @@ function processTweet( tweet ) {
       led.off();
     }, (300));
   }
-  */
+
 
   console.log('Score Team 1 : '+polls[currentPoll].team1.score);
   console.log('Score Team 2 : '+polls[currentPoll].team2.score);
