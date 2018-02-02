@@ -1,7 +1,7 @@
 var Twit = require('twit')
 var fs = require('fs')
 var five = require("johnny-five");
-// var board = new five.Board();
+var board = new five.Board();
 
 var twitterUsernameIdRecevingPollResults = '928204573642231808'; // http://gettwitterid.com/?user_name=Bastientestdsaa
 
@@ -197,7 +197,7 @@ function lookForNewPollOrder() {
   });
 }
 
-lookForNewPollOrder();
+// lookForNewPollOrder();
 
 function sendPollResults() {
   T.post('direct_messages/events/new', { event: { type: 'message_create', message_create: {
@@ -214,4 +214,4 @@ function sendPollResults() {
   })
 }
 
-sendPollResults();
+// sendPollResults();
