@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css.css">
   </head>
 
   <body>
@@ -14,7 +15,9 @@
         <div class="hashtag"></div>
         <div class="score"></div>
       </div>
-      <div class="last_tweet"></div>
+      <div class="last_tweet">
+        <div class="last_tweet_wrapper"></div>
+      </div>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
@@ -24,7 +27,7 @@
         var socket = io();
 
         socket.on('scores/update', function(data){
-          $('.last_tweet').text(data.last_tweet.text);
+          $('.last_tweet_wrapper').text(data.last_tweet.text);
           $('.bloc_score_team1 .score').text(data.poll.team1.score);
           $('.bloc_score_team1 .hashtag').text('#'+data.poll.team1.hashtag);
           $('.bloc_score_team2 .score').text(data.poll.team2.score);
