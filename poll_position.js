@@ -195,13 +195,13 @@ io.on('connection', function(socket){
     // processTweet(tweet_team1);
     // processTweet(tweet_team2);
 
-    setInterval(function(){
-      if (Math.random() < .5) {
-        processTweet(tweet_team1);
-      } else {
-        processTweet(tweet_team2);
-      }
-    },3000);
+    // setInterval(function(){
+    //   if (Math.random() < .5) {
+    //     processTweet(tweet_team1);
+    //   } else {
+    //     processTweet(tweet_team2);
+    //   }
+    // },3000);
   }
 });
 
