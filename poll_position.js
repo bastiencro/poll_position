@@ -192,7 +192,7 @@ io.on('connection', function(socket){
     // lookForNewPollOrder();
     // sendPollResults();
 
-    //processTweet(tweet_team1);
+    // processTweet(tweet_team1);
     // processTweet(tweet_team2);
 
     setInterval(function(){
