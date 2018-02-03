@@ -189,6 +189,14 @@ io.on('connection', function(socket){
 
   function startScript() {
     doPoll();
+
+    socket.emit('scores/update', {
+      last_tweet: {
+        text: ''
+      },
+      poll: polls[currentPoll],
+    });
+
     // lookForNewPollOrder();
     // sendPollResults();
 
